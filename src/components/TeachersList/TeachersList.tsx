@@ -8,10 +8,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { fetchTeachers } from '../../api';
+import AddPersonModal from '../AddPersonModal/AddPersonModal';
+import { Button } from '@mui/material';
 
 export default function StudentsList() {
   const [teachers, setTeachers] = React.useState<any>(null);
-  
+  const [showAddModal, setShowAddModal] = React.useState<boolean>(false);
+
   React.useEffect(() => {
     const fetchData = async () => {
       const teachers = await fetchTeachers();
@@ -19,10 +22,24 @@ export default function StudentsList() {
     };
     fetchData();
   }, []);
+
+  const onClose = () => {
+    setShowAddModal(false);
+  };
+  const onAddNewTeacher = () => {
+    setShowAddModal(false);
+  };
   
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="simple table">
+    <>
+      <h2 style={{ float: 'left' }}>Teachers</h2>
+      <Button style={{ float: 'right', marginTop: '15px' }} 
+        type='button' 
+        onClick={() => setShowAddModal(true)}>
+          Add
+      </Button>
+      <TableContainer component={Paper}>
+      <Table aria-label="teachers list">
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
@@ -46,5 +63,6 @@ export default function StudentsList() {
         </TableBody>
       </Table>
     </TableContainer>
+    </>
   );
 }

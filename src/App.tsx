@@ -18,24 +18,24 @@ const App = () => {
           alignItems: "center",
         }}
       >
-      <Routes>
-        <Route path="/" element={
-          <Home/>
-        }></Route>
-        <Route path="/home" element={
-          <Home/>
-        }></Route>
-        <Route path='/students' element={  
-          <Grid size={{xs: 8}}>
-            <StudentsList/>
-          </Grid>          
-        }></Route>
-        <Route path='/teachers' element={
-          <Grid size={{xs: 8}}>
-            <TeachersList/>
-          </Grid>
-        }></Route>
-      </Routes>    
+        <Routes>
+          <Route path="/" element={
+            <Home/>
+          }></Route>
+          <Route path="/home" element={
+            <Home/>
+          }></Route>
+          <Route path='/students' element={  
+            <Grid size={{xs: 8}}>
+              <StudentsList/>
+            </Grid>          
+          }></Route>
+          <Route path='/teachers' element={
+            <Grid size={{xs: 8}}>
+              <TeachersList/>
+            </Grid>
+          }></Route>
+        </Routes>    
       </Grid>
     </div>
   )
