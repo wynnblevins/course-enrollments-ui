@@ -7,28 +7,34 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { fetchStudents } from '../../api';
+import { fetchStudents, addStudent, Student } from '../../api';
 import { Button } from '@mui/material';
-import AddPersonModal from '../AddPersonModal/AddPersonModal';
+import AddPersonModal from '../AddStudenModal/AddStudenModal';
 
 export default function StudentsList() {
   const [students, setStudents] = React.useState<any>(null);
   const [showAddModal, setShowAddModal] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      const students = await fetchStudents();
-      setStudents(students.data);
-    };
-    fetchData();
+    const onMount = async () => {
+      await fetchData();
+    }
+    onMount();
   }, []);
   
   const onClose = () => {
     setShowAddModal(false);
   };
 
-  const onAddNewStudent = () => {
+  const fetchData = async () => {
+    const students = await fetchStudents();
+    setStudents(students.data);
+  };
+
+  const onAddNewStudent = async (student: Student) => {
+    await addStudent(student);
     setShowAddModal(false);
+    await fetchData();
   };
 
   return (

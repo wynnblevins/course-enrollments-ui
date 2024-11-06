@@ -4,12 +4,13 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Input } from '@mui/material';
+import { Student } from '../../api';
 
 interface AddPersonModalProps {
   title: string,
   isOpen: boolean,
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit: (student: Student) => void;
 }
 
 const boxStyle = {
@@ -33,6 +34,11 @@ export default function AddPersonModal(props: AddPersonModalProps) {
     setName(e.target.value);
   }
 
+  const submit = async () => {
+    const newStudent: Student = { name };
+    await onSubmit(newStudent);
+  };
+
   return (
     <div>
       <Modal open={isOpen}>
@@ -42,7 +48,7 @@ export default function AddPersonModal(props: AddPersonModalProps) {
             onChange={(e) => onNameChange(e)}
             style={{ display: 'block' }}></Input>
           <Button type='button' onClick={() => { onClose() }}>Close</Button>
-          <Button type='button' onClick={() => { onSubmit() }}>Submit</Button>
+          <Button type='button' onClick={() => { submit() }}>Submit</Button>
         </Box>
       </Modal>
     </div>

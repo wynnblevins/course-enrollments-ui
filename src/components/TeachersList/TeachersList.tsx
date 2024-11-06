@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { fetchTeachers } from '../../api';
-import AddPersonModal from '../AddPersonModal/AddPersonModal';
+import AddPersonModal from '../AddStudenModal/AddStudenModal';
 import { Button } from '@mui/material';
 
 export default function StudentsList() {
