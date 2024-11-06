@@ -7,31 +7,43 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { fetchTeachers } from '../../api';
-import AddPersonModal from '../AddStudenModal/AddStudenModal';
 import { Button } from '@mui/material';
+import { fetchTeachers, addTeacher, Teacher } from '../../api';
+import AddTeacherModal from '../AddTeacherModal/AddTeacherModal';
 
 export default function StudentsList() {
   const [teachers, setTeachers] = React.useState<any>(null);
   const [showAddModal, setShowAddModal] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      const teachers = await fetchTeachers();
-      setTeachers(teachers.data);
-    };
-    fetchData();
+    const onMount = async () => {
+      await fetchData();
+    }  
+    onMount();
   }, []);
 
   const onClose = () => {
     setShowAddModal(false);
   };
-  const onAddNewTeacher = () => {
+  
+  const onAddNewTeacher = async (teacher: Teacher) => {
+    await addTeacher(teacher);
     setShowAddModal(false);
+    await fetchData();
   };
   
+  const fetchData = async () => {
+    const teachers = await fetchTeachers();
+    setTeachers(teachers.data);
+  };
+
   return (
     <>
+      <AddTeacherModal 
+        title='Add New Teacher' 
+        isOpen={showAddModal}
+        onClose={onClose}
+        onSubmit={onAddNewTeacher} />
       <h2 style={{ float: 'left' }}>Teachers</h2>
       <Button style={{ float: 'right', marginTop: '15px' }} 
         type='button' 

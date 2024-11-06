@@ -1,16 +1,12 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import { Input } from '@mui/material';
-import { Student } from '../../api';
+import React from 'react'
+import { Box, Button, Input, Modal } from '@mui/material';
+import { Student, Teacher } from '../../api';
 
-interface AddPersonModalProps {
+interface ModalProps {
   title: string,
   isOpen: boolean,
   onClose: () => void;
-  onSubmit: (student: Student) => void;
+  onSubmit: (teacher: Teacher) => void;
 }
 
 const boxStyle = {
@@ -25,7 +21,7 @@ const boxStyle = {
   p: 4,
 };
 
-export default function AddPersonModal(props: AddPersonModalProps) {
+const AddTeacherModal = (props: ModalProps) => {
   const { onClose, onSubmit, isOpen, title } = props;
   
   const [name, setName] = React.useState('');
@@ -35,8 +31,8 @@ export default function AddPersonModal(props: AddPersonModalProps) {
   }
 
   const submit = async () => {
-    const newStudent: Student = { name };
-    await onSubmit(newStudent);
+    const newTeacher: Teacher = { name };
+    await onSubmit(newTeacher);
   };
 
   return (
@@ -54,3 +50,5 @@ export default function AddPersonModal(props: AddPersonModalProps) {
     </div>
   );
 }
+
+export default AddTeacherModal

@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { fetchStudents, addStudent, Student } from '../../api';
 import { Button } from '@mui/material';
-import AddPersonModal from '../AddStudenModal/AddStudenModal';
+import AddStudentModal from '../AddStudentModal/AddStudentModal';
 
 export default function StudentsList() {
   const [students, setStudents] = React.useState<any>(null);
@@ -39,7 +39,7 @@ export default function StudentsList() {
 
   return (
     <>
-      <AddPersonModal 
+      <AddStudentModal 
         title='Add New Student' 
         isOpen={showAddModal}
         onClose={onClose}
