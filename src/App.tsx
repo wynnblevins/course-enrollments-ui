@@ -24,7 +24,7 @@ const App = () => {
         }}
       >
         <Routes>
-          <Route path="/" element={
+          <Route path="/course-enrollments-ui" element={
             <Home/>
           }></Route>
           <Route path="/home" element={
