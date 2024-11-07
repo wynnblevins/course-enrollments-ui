@@ -7,9 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Button, IconButton } from '@mui/material';
 import { fetchTeachers, addTeacher, Teacher } from '../../api';
-import AddTeacherModal from '../AddTeacherModal/AddTeacherModal';
+import TeacherModal from '../TeacherModal/TeacherModal';
 
 export default function StudentsList() {
   const [teachers, setTeachers] = React.useState<any>(null);
@@ -34,12 +35,12 @@ export default function StudentsList() {
   
   const fetchData = async () => {
     const teachers = await fetchTeachers();
-    setTeachers(teachers.data);
+    setTeachers(teachers);
   };
 
   return (
     <>
-      <AddTeacherModal 
+      <TeacherModal 
         title='Add New Teacher' 
         isOpen={showAddModal}
         onClose={onClose}
@@ -56,6 +57,7 @@ export default function StudentsList() {
           <TableRow>
             <TableCell>ID</TableCell>
             <TableCell>Name</TableCell>
+            <TableCell align='right'>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -69,6 +71,11 @@ export default function StudentsList() {
               </TableCell>
               <TableCell component="td" scope="row">
                 {teacher.name}
+              </TableCell>
+              <TableCell align='right' component="td" scope='row'>
+                <IconButton aria-label="delete" size="large">
+                  <DeleteIcon fontSize="inherit" />
+                </IconButton>
               </TableCell>
             </TableRow>
           ))}

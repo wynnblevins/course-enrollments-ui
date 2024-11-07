@@ -25,7 +25,7 @@ const boxStyle = {
   p: 4,
 };
 
-export default function AddStudentModal(props: ModalProps) {
+export default function StudentModal(props: ModalProps) {
   const { onClose, onSubmit, isOpen, title } = props;
   
   const [name, setName] = React.useState('');

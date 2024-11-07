@@ -9,9 +9,16 @@ export interface Student {
 const BASE_URL = getBaseUrl();
 
 export const fetchStudents = async () => {
-  return await axios.get(`${BASE_URL}/api/students`);
+  const response = await axios.get(`${BASE_URL}/api/students`);
+  return response.data;
 };
 
 export const addStudent = async (newStudent: Student) => {
-  return await axios.post(`${BASE_URL}/api/students`, newStudent);
+  const response = await axios.post(`${BASE_URL}/api/students`, newStudent);
+  return response.data;
 }
+
+export const deleteStudent = async (id: string) => {
+  const response = await axios.delete(`${BASE_URL}/api/students/${id}`);
+  return response.data;
+};

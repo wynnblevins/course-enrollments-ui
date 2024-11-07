@@ -7,13 +7,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, IconButton } from '@mui/material';
+import { Button, IconButton, Modal } from '@mui/material';
 import StudentModal from '../StudentModal/StudentModal';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { fetchStudents, addStudent, Student, deleteStudent } from '../../api';
+import { fetchCourseTeachers, CourseTeacher, deleteCourseTeacher, addCourseTeacher } from '../../api';
+import CourseTeacherModal from '../CourseTeacherModal/CourseTeacherModal';
 
-export default function StudentsList() {
-  const [students, setStudents] = React.useState<any>(null);
+export default function CourseTeachersList() {
+  const [courseTeachers, setCourseTeachers] = React.useState<CourseTeacher[]>([]);
   const [showAddModal, setShowAddModal] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -28,58 +29,62 @@ export default function StudentsList() {
   };
 
   const fetchData = async () => {
-    const students = await fetchStudents();
-    setStudents(students);
+    const teachers = await fetchCourseTeachers();
+    setCourseTeachers(teachers);
   };
 
-  const onAddNewStudent = async (student: Student) => {
-    await addStudent(student);
+  const onAddCourseTeacher = async (courseTeacher: CourseTeacher) => {
+    await addCourseTeacher(courseTeacher);
     setShowAddModal(false);
     await fetchData();
   };
 
-  const onDeleteStudent = async (studentId: string) => {
-    await deleteStudent(studentId);
+  const onDeleteCourseTeacher = async (courseTeacherId: string) => {
+    await deleteCourseTeacher(courseTeacherId);
     await fetchData();
   };
 
   return (
     <>
-      <StudentModal 
-        title='Add New Student' 
+      <CourseTeacherModal
+        title='Add New Class Instructor' 
         isOpen={showAddModal}
         onClose={onClose}
-        onSubmit={onAddNewStudent} />
-      <h2 style={{ float: 'left' }}>Students</h2>
+        onSubmit={onAddCourseTeacher} />
+      <h2 style={{ float: 'left' }}>Class Instructors</h2>
       <Button style={{ float: 'right', marginTop: '15px' }} 
         type='button' 
         onClick={() => setShowAddModal(true)}>
           Add
       </Button>
       <TableContainer component={Paper}>
-        <Table aria-label="students list">
+        <Table aria-label="class instructors list">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
+              <TableCell>Course</TableCell>
+              <TableCell>Teacher</TableCell>
               <TableCell align='right'>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {students?.map((student: any) => (
+            {courseTeachers?.map((courseTeacher: CourseTeacher) => (
               <TableRow
-                key={student.id}
+                key={courseTeacher.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="td" scope="row">
-                  {student.id}
+                  {courseTeacher.id}
                 </TableCell>
                 <TableCell component="td" scope="row">
-                  {student.name}
+                  {courseTeacher.course.name}
+                </TableCell>
+                <TableCell component="td" scope="row">
+                  {courseTeacher.teacher.name}
                 </TableCell>
                 <TableCell align='right' component="td" scope='row'>
                 <IconButton 
-                  onClick={() => { onDeleteStudent(student.id) }} 
+                  onClick={() => { onDeleteCourseTeacher(courseTeacher.id!) }} 
                   aria-label="delete" 
                   size="large">
                   <DeleteIcon fontSize="inherit" />

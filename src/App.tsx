@@ -5,6 +5,9 @@ import TeachersList from './components/TeachersList/TeachersList';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import Grid from '@mui/material/Grid2';
+import CourseTeachersList from './components/CourseTeachersList/CourseTeachersList';
+import CoursesList from './components/CoursesList/CoursesList';
+import EnrollmentsList from './components/EnrollmentsList/EnrollmentsList';
 
 const App = () => {
   return (
@@ -33,6 +36,21 @@ const App = () => {
           <Route path='/teachers' element={
             <Grid size={{xs: 8}}>
               <TeachersList/>
+            </Grid>
+          }></Route>
+          <Route path='/courses' element={
+            <Grid size={{xs: 8}}>
+              <CoursesList />
+            </Grid>
+          }></Route>
+          <Route path='/enrollments' element={
+            <Grid size={{xs: 8}}>
+              <EnrollmentsList/>
+            </Grid>
+          }></Route>
+          <Route path='/Class Instructors' element={
+            <Grid size={{xs: 8}}>
+              <CourseTeachersList />
             </Grid>
           }></Route>
         </Routes>    

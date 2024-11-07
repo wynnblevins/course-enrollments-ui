@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Button, Input, Modal } from '@mui/material';
-import { Student, Teacher } from '../../api';
+import { Teacher } from '../../api';
 
 interface ModalProps {
   title: string,
@@ -21,7 +21,7 @@ const boxStyle = {
   p: 4,
 };
 
-const AddTeacherModal = (props: ModalProps) => {
+const TeacherModal = (props: ModalProps) => {
   const { onClose, onSubmit, isOpen, title } = props;
   
   const [name, setName] = React.useState('');
@@ -51,4 +51,4 @@ const AddTeacherModal = (props: ModalProps) => {
   );
 }
 
-export default AddTeacherModal
+export default TeacherModal
