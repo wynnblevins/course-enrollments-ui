@@ -6,3 +6,4 @@ export * from './StudentModal';
 export * from './TeacherModal';
 export * from './EnrollmentModal';
 export * from './CourseTeacherModal';
+export * from './MessageModal';
