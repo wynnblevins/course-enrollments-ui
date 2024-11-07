@@ -8,12 +8,12 @@ import Grid from '@mui/material/Grid2';
 import CourseTeachersList from './components/CourseTeachersList/CourseTeachersList';
 import CoursesList from './components/CoursesList/CoursesList';
 import EnrollmentsList from './components/EnrollmentsList/EnrollmentsList';
-// require('dotenv').config({path:__dirname+'/../.env'}) 
+
 
 const App = () => {
   
   return (
-    <div className="App">
+    <div>
       <Navbar></Navbar>
       <Grid
         container
