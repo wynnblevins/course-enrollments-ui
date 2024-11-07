@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/course-enrollment-ui/static/css/main.e6c13ad2.css",
+    "main.js": "/course-enrollment-ui/static/js/main.2899adb1.js",
+    "index.html": "/course-enrollment-ui/index.html",
+    "main.e6c13ad2.css.map": "/course-enrollment-ui/static/css/main.e6c13ad2.css.map",
+    "main.2899adb1.js.map": "/course-enrollment-ui/static/js/main.2899adb1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.2899adb1.js"
+  ]
+}
