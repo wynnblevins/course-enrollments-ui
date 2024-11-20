@@ -19,13 +19,16 @@ interface Props {
    * You won't need it on your project.
    */
   window?: () => Window;
+  started: boolean;
 }
 
 const drawerWidth = 240;
 const navItems = ['Home', 'Students', 'Teachers', 'Courses', 'Enrollments', 'Class Instructors'];
 
+
+
 export default function Navbar(props: Props) {
-  const { window } = props;
+  const { window, started } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -75,7 +78,14 @@ export default function Navbar(props: Props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Link style={{ color: "white", margin: "10px", textDecoration: "none" }} to={`${item}`}>{item}</Link>
+              <>
+                { started ? <>
+                  <Link style={{ color: "white", margin: "10px", textDecoration: "none" }} to={`${item}`}>{item}</Link>
+                </> : <>
+                  <Link style={{ color: "grey", margin: "10px", textDecoration: "none", pointerEvents: "none" }} to={`${item}`}>{item}</Link>
+                </> }
+              </>
+              
             ))}
           </Box>
         </Toolbar>

@@ -50,9 +50,7 @@ const EnrollmentModal = (props: ModalProps) => {
     const option = e.target.innerText;
     
     // find the id from the data array
-    var student = students.find((d) => { 
-      return d.name === option
-    }); 
+    var student = students.find((d) =>  d.name === option); 
     if (student?.id) {
       setStudent(student);
     }    
@@ -62,9 +60,7 @@ const EnrollmentModal = (props: ModalProps) => {
     const option = e.target.innerText;
     
     // find the id from the data array
-    var course = courses.find((d) => { 
-      return d.name === option
-    }); 
+    var course = courses.find((d) => d.name === option); 
     if (course?.id) {
       setCourse(course);
     }    
@@ -97,7 +93,7 @@ const EnrollmentModal = (props: ModalProps) => {
             onChange={(e) => { handleStudentSelected(e) }}
             getOptionLabel={(option) => option.name}
             sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Teacher" />}
+            renderInput={(params) => <TextField {...params} label="Student" />}
           />
           <Button type='button' onClick={() => { onClose() }}>Close</Button>
           <Button type='button' onClick={() => { submit() }}>Submit</Button>
