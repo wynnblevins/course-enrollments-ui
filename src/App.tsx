@@ -9,7 +9,6 @@ import CourseTeachersList from './components/CourseTeachersList/CourseTeachersLi
 import CoursesList from './components/CoursesList/CoursesList';
 import EnrollmentsList from './components/EnrollmentsList/EnrollmentsList';
 
-
 const App = () => {
   
   return (
