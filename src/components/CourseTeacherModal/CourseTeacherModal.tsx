@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Autocomplete, Box, Button, Input, Modal, TextField } from '@mui/material';
-import { Course, CourseTeacher, Enrollment, fetchCourses, fetchStudents, fetchTeachers, Teacher, addEnrollment, Student } from '../../api';
+import { 
+  Autocomplete, 
+  Box, 
+  Button, 
+  Modal, 
+  TextField 
+} from '@mui/material';
+import { 
+  Course, 
+  CourseTeacher, 
+  fetchCourses, 
+  fetchTeachers, 
+  Teacher,
+} from '../../api';
 
 interface ModalProps {
   title: string,
@@ -46,13 +58,11 @@ const EnrollmentModal = (props: ModalProps) => {
     }
   }
 
-  const handleStudentSelected = (e: any) => {
+  const handleTeacherSelected = (e: any) => {
     const option = e.target.innerText;
     
     // find the id from the data array
-    var student = teachers.find((d) => { 
-      return d.name === option
-    }); 
+    var student = teachers.find((d) => d.name === option); 
     if (student?.id) {
       setTeacher(student);
     }    
@@ -62,9 +72,7 @@ const EnrollmentModal = (props: ModalProps) => {
     const option = e.target.innerText;
     
     // find the id from the data array
-    var course = courses.find((d) => { 
-      return d.name === option
-    }); 
+    var course = courses.find((d) => d.name === option); 
     if (course?.id) {
       setCourse(course);
     }    
@@ -94,7 +102,7 @@ const EnrollmentModal = (props: ModalProps) => {
           <Autocomplete
             disablePortal 
             options={teachers}
-            onChange={(e) => { handleStudentSelected(e) }}
+            onChange={(e) => { handleTeacherSelected(e) }}
             getOptionLabel={(option) => option.name}
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Teacher" />}
