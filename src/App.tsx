@@ -23,19 +23,27 @@ const App = () => {
     // Because we're on the render "free" tier, our app is stopped 
     // when we're not using it.  This is really just a super quick
     // dirty way to tell if backend has started running yet.
-    const checkBackendStatus = () => {
-      // every ten seconds, check for a response from the server
-      const intervalID = setInterval(async () => {
-        const studentsData = await fetchStudents();
-        if (studentsData) {
-          // we got a response, mark the app as started and enable navs
-          setAppState({
-            ...appState,
-            started: true
-          });
-          clearInterval(intervalID);
-        }
-      }, 10000);
+    const checkBackendStatus = async () => {
+      const students = await fetchStudents();
+      if (students) {
+        setAppState({
+          ...appState,
+          started: true
+        });
+      } else {
+        // every ten seconds, check for a response from the server
+        const intervalID = setInterval(async () => {
+          const studentsData = await fetchStudents();
+          if (studentsData) {
+            // we got a response, mark the app as started and enable navs
+            setAppState({
+              ...appState,
+              started: true
+            });
+            clearInterval(intervalID);
+          }
+        }, 10000);
+      }
     };
     checkBackendStatus();
   }, []);

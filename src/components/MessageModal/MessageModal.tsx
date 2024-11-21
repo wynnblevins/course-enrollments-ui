@@ -5,7 +5,8 @@ interface ModalProps {
   title: string,
   message: string,
   isOpen: boolean,
-  onClose: () => void;
+  onCancel: () => void;
+  onConfirm: () => void;
 }
 
 const boxStyle = {
@@ -21,7 +22,7 @@ const boxStyle = {
 };
 
 const MessageModal = (props: ModalProps) => {
-  const { onClose, isOpen, title, message } = props;
+  const { onCancel, onConfirm,isOpen, title, message } = props;
   
   return (
     <div>
@@ -29,7 +30,8 @@ const MessageModal = (props: ModalProps) => {
         <Box sx={boxStyle}>
           <h1 className='text-xl font-bold'>{title}</h1>
           <p>{message}</p>
-          <Button type='button' onClick={() => { onClose() }}>Close</Button>
+          <Button type='button' onClick={() => { onConfirm() }}>OK</Button>
+          <Button type='button' onClick={() => { onCancel() }}>Cancel</Button>
         </Box>
       </Modal>
     </div>
