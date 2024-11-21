@@ -17,7 +17,7 @@ export const fetchCourseTeachers = async () => {
 };
 
 export const fetchCourseTeachersByTeacher = async (teacherId: string) => {
-  const response = await axios.get(`${BASE_URL}/api/courseTeachers/${teacherId}`);
+  const response = await axios.get(`${BASE_URL}/api/courseTeachers/teachers/${teacherId}`);
   return response.data;
 };
 
@@ -28,5 +28,10 @@ export const addCourseTeacher = async (courseTeacher: CourseTeacher) => {
 
 export const deleteCourseTeacher = async (id: string) => {
   const response = await axios.delete(`${BASE_URL}/api/courseTeachers/${id}`);
+  return response.data;
+};
+
+export const deleteAllForTeacher = async (teacherId: string) => {
+  const response = await axios.delete(`${BASE_URL}/api/courseTeachers/teachers/${teacherId}`);
   return response.data;
 };
