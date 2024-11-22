@@ -21,17 +21,27 @@ export const fetchCourseTeachersByTeacher = async (teacherId: string) => {
   return response.data;
 };
 
+export const fetchCourseTeachersByCourse = async (courseId: string) => {
+  const response = await axios.get(`${BASE_URL}/api/courseTeachers/courses/${courseId}`);
+  return response.data;
+};
+
 export const addCourseTeacher = async (courseTeacher: CourseTeacher) => {
   const response = await axios.post(`${BASE_URL}/api/courseTeachers`, courseTeacher);
   return response.data;
-}
+};
 
 export const deleteCourseTeacher = async (id: string) => {
   const response = await axios.delete(`${BASE_URL}/api/courseTeachers/${id}`);
   return response.data;
 };
 
-export const deleteAllForTeacher = async (teacherId: string) => {
+export const deleteAllCourseTeachersForTeacher = async (teacherId: string) => {
   const response = await axios.delete(`${BASE_URL}/api/courseTeachers/teachers/${teacherId}`);
+  return response.data;
+};
+
+export const deleteAllCourseTeachersByCourse = async (courseId: string) => {
+  const response = await axios.delete(`${BASE_URL}/api/courseTeachers/courses/${courseId}`);
   return response.data;
 };

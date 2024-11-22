@@ -13,7 +13,7 @@ import {
   fetchTeachers, 
   fetchCourseTeachersByTeacher, 
   addTeacher, 
-  deleteAllForTeacher,
+  deleteAllCourseTeachersForTeacher as deleteAllCourseTeachersForTeacher,
   deleteTeacher,
   Teacher 
 } from '../../api';
@@ -49,7 +49,7 @@ export default function StudentsList() {
 
   const performDelete = async (teacherId: string) => {
     try {
-      await deleteAllForTeacher(teacherId);
+      await deleteAllCourseTeachersForTeacher(teacherId);
     } catch (e: any) {
       console.error(`Unable to delete course teacher with teacher ID ${teacherId}`, e);
     }

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const getBaseUrl = () => {
   let url;
-  switch(process.env.NODE_ENV) {
+  switch(process.env.REACT_APP_ENV) {
     case 'production':
       url = 'https://course-enrollment-0-0-3.onrender.com';
       break;
@@ -10,7 +10,7 @@ const getBaseUrl = () => {
       url = 'http://localhost:8080';
       break;
     default:
-      url = 'https://course-enrollment-0-0-3.onrender.com';
+      url = 'http://localhost:8080';
   }
 
   return url;
