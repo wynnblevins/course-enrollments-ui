@@ -23,7 +23,7 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Students', 'Teachers', 'Courses', 'Enrollments', 'Class Instructors'];
+const navItems = ['Home', 'Students', 'Teachers', 'Courses', 'Enrollments', 'Instructors'];
 
 
 
