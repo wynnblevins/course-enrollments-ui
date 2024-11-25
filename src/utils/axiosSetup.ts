@@ -4,13 +4,13 @@ const getBaseUrl = () => {
   let url;
   switch(process.env.NODE_ENV) {
     case 'production':
-      url = 'https://course-enrollment-0-0-3.onrender.com';
+      url = 'https://course-enrollment-0-0-4.onrender.com';
       break;
     case 'development':
-      url = 'http://localhost:8080';
+      url = 'https://course-enrollment-0-0-4.onrender.com';
       break;
     default:
-      url = 'https://course-enrollment-0-0-3.onrender.com';
+      url = 'https://course-enrollment-0-0-4.onrender.com';
   }
 
   return url;

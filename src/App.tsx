@@ -15,6 +15,7 @@ interface AppState {
 }
 
 const App = () => {
+
   const [appState, setAppState] = useState<AppState>({
     started: false
   })
@@ -30,19 +31,6 @@ const App = () => {
           ...appState,
           started: true
         });
-      } else {
-        // every ten seconds, check for a response from the server
-        const intervalID = setInterval(async () => {
-          const studentsData = await fetchStudents();
-          if (studentsData) {
-            // we got a response, mark the app as started and enable navs
-            setAppState({
-              ...appState,
-              started: true
-            });
-            clearInterval(intervalID);
-          }
-        }, 10000);
       }
     };
     checkBackendStatus();
@@ -63,7 +51,7 @@ const App = () => {
           <Route path="/course-enrollments-ui" element={
             <Home started={appState.started}/>
           }></Route>
-          <Route path="/home" element={
+          <Route path="//home" element={
             <Home started={appState.started}/>
           }></Route>
           <Route path='/students' element={  
@@ -86,7 +74,7 @@ const App = () => {
               <EnrollmentsList/>
             </Grid>
           }></Route>
-          <Route path='/Class Instructors' element={
+          <Route path='/instructors' element={
             <Grid size={{xs: 8}}>
               <CourseTeachersList />
             </Grid>

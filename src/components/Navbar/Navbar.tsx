@@ -25,8 +25,6 @@ interface Props {
 const drawerWidth = 240;
 const navItems = ['Home', 'Students', 'Teachers', 'Courses', 'Enrollments', 'Instructors'];
 
-
-
 export default function Navbar(props: Props) {
   const { window, started } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
