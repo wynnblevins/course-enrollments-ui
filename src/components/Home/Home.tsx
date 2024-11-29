@@ -8,8 +8,6 @@ interface HomeProps {
 const Home = (props: HomeProps) => {
   const { started } = props;
 
-  console.log(started);
-
   return (
     <div style={{ margin: '30px' }}>
       { started ? <></> : (
