@@ -27,7 +27,9 @@ const Home = (props: HomeProps) => {
       <p>The backend for this project is hosted on render (https://render.com) and it talks to a database thats hosted within
         Aiven (https://aiven.io/).  All of this hosting is done on the "free" or "hobby" tiers.  What this means is that the servers
         for this project are stopped when not in use.  With that in mind, your initial interactions with the application may seem 
-        delayed or laggy.  Please be patient.  The backend simply needs to wake up, then the application will function normally.
+        delayed or laggy.  Please be patient.  The backend simply needs to "wake up", then the application will function normally.  This
+        process could take between five to ten minutes.  Once the backend has started, the page links in the blue navbar (ie home, students,
+        teachers, etc) will become enabled and you will be able to use the application normally.
       </p>
     </div>
   )
