@@ -51,7 +51,7 @@ const App = () => {
           <Route path="/course-enrollments-ui" element={
             <Home started={appState.started}/>
           }></Route>
-          <Route path="//home" element={
+          <Route path="/home" element={
             <Home started={appState.started}/>
           }></Route>
           <Route path='/students' element={  
