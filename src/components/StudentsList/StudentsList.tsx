@@ -7,41 +7,77 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, IconButton } from '@mui/material';
-import StudentModal from '../StudentModal/StudentModal';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { fetchStudents, addStudent, Student, deleteStudent } from '../../api';
+import { Button, IconButton } from '@mui/material';
+import { 
+  fetchCourseTeachersByTeacher, 
+  addStudent, 
+  deleteAllForStudent as deleteAllEnrollmentsForStudent,
+  deleteStudent,
+  Student,
+  fetchStudents,
+  fetchEnrollmentsByStudentId
+} from '../../api';
+import MessageModal from "../MessageModal/MessageModal";
+import StudentModal from '../StudentModal/StudentModal';
 
-export default function StudentsList() {
-  const [students, setStudents] = React.useState<any>(null);
+export default function TeachersList() {
+  const [students, setStudents] = React.useState<Student[]>([]);
   const [showAddModal, setShowAddModal] = React.useState<boolean>(false);
+  const [showMessageModal, setShowMessageModal] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     const onMount = async () => {
       await fetchData();
-    }
+    }  
     onMount();
   }, []);
-  
+
   const onClose = () => {
     setShowAddModal(false);
   };
-
-  const fetchData = async () => {
-    const students = await fetchStudents();
-    setStudents(students);
-  };
-
+  
   const onAddNewStudent = async (student: Student) => {
     await addStudent(student);
     setShowAddModal(false);
     await fetchData();
   };
+  
+  const fetchData = async () => {
+    const students = await fetchStudents();
+    setStudents(students);
+  };
 
-  const onDeleteStudent = async (studentId: string) => {
-    await deleteStudent(studentId);
+  const performDelete = async (studentId: string) => {
+    try {
+      await deleteAllEnrollmentsForStudent(studentId);
+    } catch (e: any) {
+      console.error(`Unable to delete course enrollments for student ID ${studentId}`, e);
+    }
+
+    setShowMessageModal(false);
+
+    try {
+      await deleteStudent(studentId);
+    } catch (e: any) {
+      console.error(`Unable to delete student with ID ${studentId}`, e);
+    }
+
     await fetchData();
   };
+
+  const onDeleteClick = async (studentId: string) => {
+    const coursesForStudent = await fetchEnrollmentsByStudentId(studentId);
+    if (coursesForStudent.length) {
+      setShowMessageModal(true);
+    } else {
+      performDelete(studentId) 
+    }
+  };
+
+  const closeModal = () => {
+    setShowMessageModal(false);
+  }
 
   return (
     <>
@@ -57,16 +93,17 @@ export default function StudentsList() {
           Add
       </Button>
       <TableContainer component={Paper}>
-        <Table aria-label="students list">
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell align='right'>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {students?.map((student: any) => (
+      <Table aria-label="teachers list">
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell align='right'>Actions</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {students?.map((student: Student) => (
+            <>
               <TableRow
                 key={student.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -78,18 +115,25 @@ export default function StudentsList() {
                   {student.name}
                 </TableCell>
                 <TableCell align='right' component="td" scope='row'>
-                <IconButton 
-                  onClick={() => { onDeleteStudent(student.id) }} 
-                  aria-label="delete" 
-                  size="large">
-                  <DeleteIcon fontSize="inherit" />
-                </IconButton>
-              </TableCell>
+                  <IconButton onClick={() => onDeleteClick(student.id as string)} aria-label="delete" size="large">
+                    <DeleteIcon fontSize="inherit" />
+                  </IconButton>
+                </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+              <MessageModal 
+                title={"Student Has Enrollments"}
+                message={"This student is still enrolled in at least one course.  Deleting this student will also delete all of their course enrollments.  Do you wish to continue?"}
+                isOpen={showMessageModal} 
+                onCancel={() => { closeModal() }}
+                onConfirm={() => { 
+                  performDelete(student.id as string);
+                }}
+              ></MessageModal>
+            </>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
     </>
   );
 }

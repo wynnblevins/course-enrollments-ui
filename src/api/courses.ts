@@ -22,3 +22,4 @@ export const deleteCourse = async (id: string) => {
   const response = await axios.delete(`${BASE_URL}/api/courses/${id}`);
   return response.data;
 };
+

@@ -1,8 +1,6 @@
-import axios from "axios";
-
 const getBaseUrl = () => {
   let url;
-  switch(process.env.NODE_ENV) {
+  switch(process.env.REACT_APP_ENV) {
     case 'production':
       url = 'https://course-enrollment-0-0-4.onrender.com';
       break;
